@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-Party Apps
     'rest_framework',
+    'rest_framework.authtoken',
+
+    # Local Apps (My project's apps)
     'basic_api',
 ]
 
