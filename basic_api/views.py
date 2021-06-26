@@ -17,7 +17,51 @@ from rest_framework import mixins
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework import viewsets
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
+
+'''
+VIEW SET & ROUTERS EXAMPLE
+'''
+class ArticalViewSet(viewsets.ViewSet):
+    def list(self, request):
+        articals = Artical.objects.all()
+        #convert articals data to serializer
+        serializer = ArticalSerializer(articals, many = True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        serializer = ArticalSerializer(data = request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk = None):
+        querySet = Artical.objects.all()
+        artical = get_object_or_404(querySet, pk = pk)
+        serializer = ArticalSerializer(artical)
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        artical = Artical.objects.get(pk = pk)
+        serializer = ArticalSerializer(artical, data = request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        artical = Artical.objects.get(pk = pk)
+        artical.delete()
+        return JsonResponse({'message':'Successfully deleted the information.'})
+
+
+
 
 '''
 GENERIC API VIEW Example
