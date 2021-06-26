@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Local Apps (My project's apps)
     'basic_api',
+    'carInfo',
 ]
 
 MIDDLEWARE = [
