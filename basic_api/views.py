@@ -23,6 +23,24 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 '''
+MODEL VIEW SET Example
+'''
+class ArticalModelViewSet(viewsets.ModelViewSet):
+    serializer_class = ArticalSerializer
+    queryset = Artical.objects.all()
+
+
+
+'''
+GENERIC VIEW SET Example
+'''
+class ArticalGenericViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    serializer_class = ArticalSerializer
+    queryset = Artical.objects.all()
+
+
+
+'''
 VIEW SET & ROUTERS EXAMPLE
 '''
 class ArticalViewSet(viewsets.ViewSet):
