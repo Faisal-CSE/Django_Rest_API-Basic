@@ -13,7 +13,7 @@ router2 = DefaultRouter()
 router2.register('artical2', ArticalModelViewSet, basename = 'artical2')
 
 urlpatterns = [
-
+    #AUTHOR: FAISAL PORAG
     #View set Url example
     path('api/viewset/', include(router.urls)),
     path('api/viewset/<int:pk>/', include(router.urls)),
